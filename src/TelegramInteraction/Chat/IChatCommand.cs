@@ -8,5 +8,6 @@ namespace TelegramInteraction.Chat
     {
         Task ExecuteAsync(Message message);
         string[] SupportedTemplates { get; }
+        CommandType Type { get; }
     }
 }

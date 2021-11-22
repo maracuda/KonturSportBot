@@ -13,6 +13,7 @@ namespace TelegramInteraction.Chat
         }
 
         public string[] SupportedTemplates => new[] {"/chatId"};
+        public CommandType Type => CommandType.Text;
 
         public async Task ExecuteAsync(Message message)
         {

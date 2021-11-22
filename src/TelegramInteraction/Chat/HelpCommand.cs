@@ -14,6 +14,8 @@ namespace TelegramInteraction.Chat
 
         public string[] SupportedTemplates => new[] {"/help", "/start"};
 
+        public CommandType Type => CommandType.Text;
+
         public async Task ExecuteAsync(Message message)
         {
             await telegramBotClient.SendTextMessageAsync(
