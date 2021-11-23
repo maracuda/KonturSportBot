@@ -4,6 +4,7 @@ using BusinessLogic.CreatePolls;
 
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace TelegramInteraction.Chat
 {
@@ -20,8 +21,19 @@ namespace TelegramInteraction.Chat
 
         public async Task ExecuteAsync(Message message)
         {
-            await createPollService.CreateAsync(message.Chat.Id, message.From.Id);
-            await telegramBotClient.SendTextMessageAsync(message.Chat.Id, "Send me a poll you want to schedule");
+            var requestId = await createPollService.CreateAsync(message.Chat.Id, message.From.Id);
+            await telegramBotClient.SendTextMessageAsync(message.Chat.Id, "Choose name"
+                                                                          + "F.e. \"My awesome poll\"",
+                                                         replyMarkup:new InlineKeyboardMarkup(new InlineKeyboardButton
+                                                             {
+                                                                 Text = "txt",
+                                                                 CallbackData = $"/callback_addName_{requestId}",
+                                                             })
+                // Создавать нужно в отдельном чате, чтобы другие из группы не видели
+                
+                // Создали в чате с ботом
+                // Позвали в групповой чат, попросили бота постить результат в этом чате
+            );
         }
 
         public string[] SupportedTemplates => new[] { "/new" };

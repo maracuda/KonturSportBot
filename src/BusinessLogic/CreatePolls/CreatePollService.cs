@@ -16,7 +16,7 @@ namespace BusinessLogic.CreatePolls
             createPollRequests = new Dictionary<Guid, CreatePollRequest>();
         }
 
-        public Task CreateAsync(long chatId, int userId)
+        public Task<Guid> CreateAsync(long chatId, int userId)
         {
             var createPollRequest = new CreatePollRequest
                 {
@@ -24,8 +24,7 @@ namespace BusinessLogic.CreatePolls
                 };
 
             createPollRequests.Add(createPollRequest.Id, createPollRequest);
-            return Task.FromResult(createPollRequest
-            );
+            return Task.FromResult(createPollRequest.Id);
         }
 
         public Task<CreatePollRequest> FindPendingAsync(long chatId, int userId)
