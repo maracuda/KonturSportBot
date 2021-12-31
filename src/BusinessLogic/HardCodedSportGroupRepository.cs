@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -6,6 +7,8 @@ namespace BusinessLogic
     {
         public Task<SportGroup[]> ReadAllAsync()
         {
+            return Task.FromResult(Array.Empty<SportGroup>());
+            
             return Task.FromResult(new[]
                     {
                         // NOTE: в Heroku время по utc, поэтому во всех расписаниях время по utc
